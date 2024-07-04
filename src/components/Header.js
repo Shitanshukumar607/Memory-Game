@@ -1,11 +1,13 @@
-export default function Header() {
+export default function Header(props) {
   return (
     <header>
       <p>
-        <span>Moves:</span>11
+        <span>Moves: </span>
+        {props.info.moves}
       </p>
       <p>
-        <span>Time:</span>00.39
+        <span>Time: </span>
+        {props.info.time}s
       </p>
     </header>
   );
