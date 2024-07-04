@@ -1,4 +1,4 @@
-export default images = [
+const Images = [
   "bee.png",
   "cat.png",
   "dog.png",
@@ -16,3 +16,5 @@ export default images = [
   "rabbit.png",
   "turtle.png",
 ];
+
+export default Images;
