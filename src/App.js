@@ -1,7 +1,8 @@
 import Header from "./components/Header.js";
 import Main from "./components/Main.js";
+import Images from "./images.js";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function App() {
   const [gameInfo, setgameInfo] = useState({
@@ -9,33 +10,59 @@ export default function App() {
     time: 39,
   });
 
-  const images = [
-    "bee.png",
-    "cat.png",
-    "dog.png",
-    "fish.png",
-    "panda.png",
-    "penguin.png",
-    "rabbit.png",
-    "turtle.png",
-    "bee.png",
-    "cat.png",
-    "dog.png",
-    "fish.png",
-    "panda.png",
-    "penguin.png",
-    "rabbit.png",
-    "turtle.png",
-  ];
+  const [imagesArray, setImagesArray] = useState([]);
 
-  const [imagesArray, setImagesArray] = useState(shuffleArray(images));
-  console.log(imagesArray);
+  useEffect(() => {
+    setImagesArray(shuffleArray(Images));
+  }, []);
+
+  const [currentImage, setCurrentImage] = useState([]);
 
   function handleClick(event) {
     console.log(event.target);
 
-    event.target.classList.add("flip-vertical-left");
-    event.target.src = "images/cat.png";
+    const id = event.target.id;
+    console.log(id);
+    const imagePng = imagesArray[id];
+    const imagePath = "images/" + imagePng;
+    const questionMarkPath = "images/question-mark.png";
+
+    event.target.classList.add("animation");
+
+    setTimeout(() => {
+      event.target.src = imagePath;
+      event.target.classList.remove("question");
+    }, 200);
+
+    setCurrentImage((prevState) => {
+      let returnArray = [];
+
+      returnArray = [...prevState, event.target.id];
+
+      console.log(returnArray.length);
+
+      console.log(imagesArray[returnArray[0]]);
+      console.log(imagesArray[returnArray[1]]);
+
+      returnArray.length == 2 &&
+        (imagesArray[returnArray[0]] == imagesArray[returnArray[1]]
+          ? handleMatch(returnArray)
+          : handleNotAMatch(returnArray));
+
+      return returnArray;
+    });
+  }
+
+  function handleMatch(arrayPara) {
+    console.log("match");
+    arrayPara = [];
+  }
+
+  function handleNotAMatch(arrayPara) {
+    // imagesArray[arrayPara[0]].classList.remove("animation");
+
+    console.log("not a match");
+    arrayPara = [];
   }
 
   return (

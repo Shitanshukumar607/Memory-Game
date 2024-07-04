@@ -30,7 +30,6 @@ body {
 
 header {
   color: black;
-  background-color: pink;
   display: flex;
   flex-direction: column;
   align-items: end;
@@ -56,9 +55,8 @@ main {
 main img {
   height: 85px;
   aspect-ratio: 1;
-  background-color: pink;
   padding: 10px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 7px solid black;
   cursor: pointer;
 }
@@ -67,14 +65,12 @@ main img {
   background-color: #f4c531;
 }
 
-.flip-vertical-left {
-  -webkit-animation: flip-vertical-left 0.4s
-    cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
-  animation: flip-vertical-left 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955)
-    both;
+.animation {
+  -webkit-animation: animation 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
+  animation: animation 0.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) both;
 }
 
-@-webkit-keyframes flip-vertical-left {
+@-webkit-keyframes animation {
   0% {
     -webkit-transform: rotateY(0);
     transform: rotateY(0);
@@ -85,7 +81,7 @@ main img {
   }
 }
 
-@keyframes flip-vertical-left {
+@keyframes animation {
   0% {
     -webkit-transform: rotateY(0);
     transform: rotateY(0);
