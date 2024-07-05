@@ -6,11 +6,12 @@ import { useState, useEffect } from "react";
 
 export default function App() {
   const [gameInfo, setgameInfo] = useState({
-    moves: 10,
+    moves: 0,
     time: 39,
   });
 
   const [imagesArray, setImagesArray] = useState([]);
+  const questionMarkPath = "images/question-mark.png";
 
   useEffect(() => {
     setImagesArray(shuffleArray(Images));
@@ -19,6 +20,16 @@ export default function App() {
   const [currentImage, setCurrentImage] = useState([]);
 
   function handleClick(event) {
+    if (!event.target.classList.contains("not-flipped")) {
+      return;
+    }
+
+    event.target.classList.remove("not-flipped");
+
+    setgameInfo((prevState) => {
+      return { ...prevState, moves: prevState.moves + 1 };
+    });
+
     console.log(event.target);
 
     const id = event.target.id;
@@ -37,17 +48,20 @@ export default function App() {
     setCurrentImage((prevState) => {
       let returnArray = [];
 
-      returnArray = [...prevState, event.target.id];
+      returnArray = [
+        ...prevState,
+        { id: event.target.id, element: event.target },
+      ];
 
       console.log(returnArray.length);
 
-      console.log(imagesArray[returnArray[0]]);
-      console.log(imagesArray[returnArray[1]]);
+      console.log(imagesArray[returnArray[0].id]);
+      console.log(returnArray[1] && imagesArray[returnArray[1].id]);
 
       returnArray.length == 2 &&
-        (imagesArray[returnArray[0]] == imagesArray[returnArray[1]]
-          ? handleMatch(returnArray)
-          : handleNotAMatch(returnArray));
+        (imagesArray[returnArray[0].id] == imagesArray[returnArray[1].id]
+          ? (returnArray = handleMatch(returnArray))
+          : (returnArray = handleNotAMatch(returnArray)));
 
       return returnArray;
     });
@@ -55,14 +69,28 @@ export default function App() {
 
   function handleMatch(arrayPara) {
     console.log("match");
-    arrayPara = [];
+
+    return [];
   }
 
   function handleNotAMatch(arrayPara) {
-    // imagesArray[arrayPara[0]].classList.remove("animation");
-
+    arrayPara[0].element.classList.remove("animation");
     console.log("not a match");
-    arrayPara = [];
+    console.log(arrayPara[0].element);
+
+    arrayPara[0].element.classList.add("animation");
+
+    setTimeout(() => {
+      arrayPara[0].element.src = questionMarkPath;
+      arrayPara[0].element.classList.add("question");
+      arrayPara[0].element.classList.add("not-flipped");
+
+      arrayPara[1].element.src = questionMarkPath;
+      arrayPara[1].element.classList.add("question");
+      arrayPara[1].element.classList.add("not-flipped");
+    }, 2000);
+
+    return [];
   }
 
   return (

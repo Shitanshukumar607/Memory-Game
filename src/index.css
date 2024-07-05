@@ -12,16 +12,17 @@ body {
   height: 100vh;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 #root {
   background-color: #fff;
-  height: 650px;
-  width: 550px;
+  max-height: 650px;
+  max-width: 550px;
   display: flex;
   flex-direction: column;
   gap: 20px;
-  padding: 40px;
+  padding: 30px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -45,16 +46,22 @@ header span {
 }
 
 main {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+  gap: 20px; */
+
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
   gap: 20px;
 }
 
 main img {
-  height: 85px;
-  aspect-ratio: 1;
+  /* height: 80px; */
+  max-width: 90px;
+  /* aspect-ratio: 1; */
   padding: 10px;
   border-radius: 10px;
   border: 7px solid black;

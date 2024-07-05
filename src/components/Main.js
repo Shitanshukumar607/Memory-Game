@@ -5,7 +5,7 @@ export default function Main(props) {
     return (
       <img
         src="images/question-mark.png"
-        className="question"
+        className="question not-flipped"
         onClick={props.handleClick}
         key={index}
         id={index}
